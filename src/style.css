@@ -73,3 +73,23 @@ form {
 .add-task .material-icons {
   color: #b2b2b2;
 }
+
+ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 0 ;
+  padding-right: 0 ;
+  list-style: none;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 2% 0;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+ul li .material-icons {
+  color: #b2b2b2;
+}
