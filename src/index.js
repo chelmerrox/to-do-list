@@ -23,18 +23,22 @@ const tasks = [{
 },
 ];
 
-tasks.forEach((task) => {
-  const li = document.createElement('li');
+const createList = () => {
+  tasks.forEach((task) => {
+    const li = document.createElement('li');
+  
+    li.innerHTML = `
+      <div class="task">
+        <input type="checkbox" id="task-${task.index}" name="task-${task.index}" value=""/>
+        <input type="text" name="task-${task.index} value="${task.description}" placeholder="${task.description}"/>
+      </div>
+      <button>
+        <i class="vertical-line-icon material-icons">more_vert</i>
+      </button>
+    `;
+  
+    ul.appendChild(li);
+  });
+}
 
-  li.innerHTML = `
-    <div class="task">
-      <input type="checkbox" id="task-${task.index}" name="task-${task.index}" value=""/>
-      <input type="text" name="task-${task.index} value="${task.description}" placeholder="${task.description}"/>
-    </div>
-    <button>
-      <i class="vertical-line-icon material-icons">more_vert</i>
-    </button>
-  `;
-
-  ul.appendChild(li);
-});
+createList();
