@@ -91,6 +91,20 @@ ul li {
   border-bottom: 1px solid #b9b9b9;
 }
 
+ul li input[type="text"] {
+  border: none;
+}
+
+ul li input[type="text"]::placeholder {
+  color: black;
+  font-size: medium;
+}
+
+ul li button {
+  border: none;
+  background-color: white;
+}
+
 ul li .material-icons {
   color: #b2b2b2;
 }

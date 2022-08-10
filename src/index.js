@@ -16,6 +16,11 @@ const tasks = [{
     description: 'Task 3',
     completed: false,
     index: 3
+  },
+  {
+    description: 'Task 4',
+    completed: false,
+    index: 4
   }
 ];
 
@@ -25,9 +30,11 @@ tasks.forEach((task) => {
   li.innerHTML = `
     <div class="task">
       <input type="checkbox" id="task-${task.index}" name="task-${task.index}" value=""/>
-      <label for="task-${task.index}">Task ${task.index}</label>
+      <input type="text" name="task-${task.index} value="${task.description}" placeholder="${task.description}"/>
     </div>
-    <i class="material-icons">more_vert</i>
+    <button>
+      <i class="material-icons">more_vert</i>
+    </button>
   `;
 
   ul.appendChild(li);
