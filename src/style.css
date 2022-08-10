@@ -93,3 +93,12 @@ ul li {
 ul li .material-icons {
   color: #b2b2b2;
 }
+
+.clear-list {
+  border: none;
+  background-color: white;
+  font-size: medium;
+  font-style: italic;
+  color: #b2b2b2;
+  padding: 2% 0;
+}
