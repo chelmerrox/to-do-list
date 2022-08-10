@@ -1,7 +1,34 @@
-body {
-  background-color: bisque;
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;  /* for Google Chrome and Apple Safari */
+  -moz-box-sizing: border-box;    /* for Mozilla Firefox */
+  -ms-box-sizing: border-box;   /* for Microsoft's Internet Explorer */
+  box-sizing: border-box;       /* box-sizing is a property allows us to change exactly how the box-model works  */
 }
 
-.hello {
-  color: red;
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', Helvetica, sans-serif;
+  background-color: rgb(255, 255, 255);
+
+  /*  position: relative; */
+  min-height: 100vh;  /* vh (viewport height as unit of measure)) */
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5% 20%;
+  width: 60%;
+  padding: 10px 5px;
+  border: 1px solid #d3d3d3;
+  box-shadow: 1px 1px 10px #d3d3d3;
 }
