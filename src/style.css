@@ -48,7 +48,7 @@ form {
   color: rgb(61, 61, 61);
 }
 
-.header .material-icons {
+.header .loop-icon {
   color: #b2b2b2;
 }
 
@@ -71,7 +71,7 @@ form {
   color: #b2b2b2;
 }
 
-.add-task .material-icons {
+.add-task .return-icon {
   color: #b2b2b2;
 }
 
@@ -79,8 +79,8 @@ ul {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 0 ;
-  padding-right: 0 ;
+  padding-left: 0;
+  padding-right: 0;
   list-style: none;
 }
 
@@ -105,7 +105,7 @@ ul li button {
   background-color: white;
 }
 
-ul li .material-icons {
+ul li .vertical-line-icon {
   color: #b2b2b2;
 }
 
