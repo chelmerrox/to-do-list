@@ -14,7 +14,7 @@
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/milestone-1/dist/index.html)
 
 ## Getting Started
 
