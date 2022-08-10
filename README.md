@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# To do List
+# To Do List
 
-> This project is to apply everything I had learned in the Webpack documentation & extra sources in order to setup Webpack. It also reinforces what I've learned prior to the Webpack readings (npm & other package managers, dependencies, bundling, etc).
+> This is a To-Do list app where a user can add or remove a task in a list & clear the list when all tasks are completed. Users can also change the order of the tasks on the list. Webpack has been used in this project.
 
 ## Built With
 
@@ -14,7 +14,7 @@
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/milestone-1/dist/index.html)
 
 ## Getting Started
 
