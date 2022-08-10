@@ -32,3 +32,21 @@ main {
   border: 1px solid #d3d3d3;
   box-shadow: 1px 1px 10px #d3d3d3;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.header p {
+  font-size: medium;
+  font-weight: bold;
+  color: rgb(61, 61, 61);
+}
+
+.header .material-icons {
+  color: #e1e0e0;
+}
