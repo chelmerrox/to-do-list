@@ -50,3 +50,26 @@ form {
 .header .material-icons {
   color: #b2b2b2;
 }
+
+.add-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  padding: 2% 0;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.add-task input {
+  border: none;
+}
+
+.add-task input::placeholder {
+  font-size: medium;
+  font-style: italic;
+  color: #b2b2b2;
+}
+
+.add-task .material-icons {
+  color: #b2b2b2;
+}
