@@ -26,7 +26,7 @@ const tasks = [{
 const createList = () => {
   tasks.forEach((task) => {
     const li = document.createElement('li');
-  
+
     li.innerHTML = `
       <div class="task">
         <input type="checkbox" id="task-${task.index}" name="task-${task.index}" value=""/>
@@ -36,9 +36,9 @@ const createList = () => {
         <i class="vertical-line-icon material-icons">more_vert</i>
       </button>
     `;
-  
+
     ul.appendChild(li);
   });
-}
+};
 
 createList();
