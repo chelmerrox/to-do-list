@@ -71,6 +71,11 @@ form {
   color: #b2b2b2;
 }
 
+.add-task button {
+  border: none;
+  background-color: white;
+}
+
 .add-task .return-icon {
   color: #b2b2b2;
 }
@@ -100,14 +105,14 @@ ul li input[type="text"]::placeholder {
   font-size: medium;
 }
 
-ul li button {
+/* ul li button {
   border: none;
   background-color: white;
 }
 
 ul li .vertical-line-icon {
   color: #b2b2b2;
-}
+} */
 
 .clear-list {
   border: none;

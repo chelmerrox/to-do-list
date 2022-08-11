@@ -10,7 +10,7 @@
   <script defer src="runtime.js"></script><script defer src="main.js"></script></head>
 
   <body>
-    <form>
+    <form id="form">
       <!--Header-->
       <div class="header">
         <p>Today's To Do</p>
@@ -20,7 +20,9 @@
       <!--Add a task-->
       <div class="add-task">
         <input type="text" name="task" value="" placeholder="Add to your list..."/>
-        <i class="return-icon material-icons">keyboard_return</i>
+        <button type="submit">
+          <i class="return-icon material-icons">keyboard_return</i>
+        </button>
       </div>
 
       <!--List of tasks-->
