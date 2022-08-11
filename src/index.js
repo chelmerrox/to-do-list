@@ -1,21 +1,27 @@
 import './style.css';
 
 const formSubmission = document.getElementById('form');
-const tasks = [];
-let indexOne = 0;
+let tasks = [];
+let i = 0;
 const ul = document.querySelector('ul');
 
 const removeTask = (taskObject, index) => {
-  const li = document.getElementById(index);
+  const list = document.getElementById(index);
 
-  const { description, completed, indexOne } = taskObject;
+  // needed so that we're able to filter & store the new result in local storage
+  //taskObject.completed = true;
 
-  tasks.filter((task) => {
-    task.description !== description && task.completed !== completed && task.index !== indexOne
-   })
+  const { description, completed, i } = taskObject;
 
-   localStorage.setItem('tasksArray', JSON.stringify(tasks));
-   ul.removeChild(li);
+  tasks = tasks.filter((task) => task.description !== description && task.completed === completed && task.i !== i );
+
+  // Change the value of i & store in the i property for the specific task
+  tasks.map((task, j) => {
+    task.i = j + 1;
+  });
+
+  localStorage.setItem('tasksArray', JSON.stringify(tasks));
+  ul.removeChild(list);
 };
 
 const displayTask = (taskObject, index) => {
@@ -60,9 +66,9 @@ const displayTask = (taskObject, index) => {
 };
 
 const addTask = (taskObject) => {
-  indexOne = (tasks.length === 0)? 1 : tasks.length + 1;
+  i = (tasks.length === 0)? 1 : tasks.length + 1; //index for taskObject
 
-  taskObject.index = indexOne;
+  taskObject.i = i;
 
   tasks.push(taskObject);
   
