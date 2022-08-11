@@ -77,6 +77,22 @@ const addTask = (taskObject) => {
   displayTask(taskObject, tasks.length - 1);
 }
 
+const getFromLocal = () => {
+  if (localStorage.getItem('tasksArray')) {
+    tasks = JSON.parse(localStorage.getItem('tasksArray'));
+
+    tasks.forEach((taskObject, index) => {
+      displayTask(taskObject, index);
+    });
+  } else {
+    localStorage.setItem('tasksArray', '');
+    tasks = [];
+  }
+};
+
+// check local storage before adding a task (upon first visit to page or reload of page in the same browser)
+getFromLocal();
+
 formSubmission.addEventListener('submit', (e) => {
   e.preventDefault();
 
