@@ -2,7 +2,7 @@ import './style.css';
 
 const formSubmission = document.getElementById('form');
 let tasks = [];
-let i = 0;
+let i = 0; // to be stored as the value of the index (i) property in taskObject
 const ul = document.querySelector('ul');
 
 const removeTask = (taskObject, index) => {
@@ -29,9 +29,9 @@ const displayTask = (taskObject, index) => {
   li.id = index;
 
   li.innerHTML = `
-    <div class="task">
+    <div class="task task-${taskObject.index}">
       <input type="checkbox" id="task-${taskObject.index}" name="task-${taskObject.index}" value=""/>
-      <input type="text" name="task-${taskObject.index} value="${taskObject.description}" placeholder="${taskObject.description}"/>
+      <button class="task-to-edit">${taskObject.description}</button>
     </div>
   `;
 
@@ -77,6 +77,17 @@ const addTask = (taskObject) => {
   displayTask(taskObject, tasks.length - 1);
 }
 
+// Old implementation
+/* const editTask = (editTaskInput, editTaskValue) => {
+  editTaskValue = editTaskInput.value;
+
+  if (editTaskValue !== '') {
+    tasks.map((element, k) => {
+      if ()
+    });
+  }
+}; */
+
 const getFromLocal = () => {
   if (localStorage.getItem('tasksArray')) {
     tasks = JSON.parse(localStorage.getItem('tasksArray'));
@@ -109,3 +120,36 @@ formSubmission.addEventListener('submit', (e) => {
 
   formSubmission.reset();
 });
+
+let editTaskInput = Array.from(document.querySelectorAll('.task-to-edit'));
+console.log(editTaskInput);
+
+// Old implementation
+/* editTaskInput.forEach((taskInput) => {
+  let editTaskValue = taskInput.getAttribute('value');
+  console.log(`editTaskValue: ${editTaskValue}`);
+
+  editTaskInput.onclick = () => {
+    editTaskValue = '';
+    editTaskInput.removeAttribute('placeholder');
+    editTask(editTaskInput, editTaskValue);
+  };
+}); */
+
+editTaskInput.forEach((taskInput) => {
+  const taskContainer  = document.querySelector('.task');
+
+  console.log(taskInput);
+
+  taskInput.onclick = () => {
+    const editTaskInput2 = document.createElement('input');
+    editTaskInput2.classList.add('edit-task-input-2');
+    editTaskInput2.setAttribute('type', 'text');
+    editTaskInput2.setAttribute('name', 'edit-task-input-2');
+    editTaskInput2.setAttribute('value', `${taskInput.innerText}`);
+    editTaskInput2.setAttribute('placeholder', '');
+
+    taskContainer.removeChild(taskInput);
+    taskContainer.appendChild(editTaskInput2);
+  };
+})
