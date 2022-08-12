@@ -2,7 +2,7 @@
 
 # To Do List
 
-> This is a To-Do list app where a user can add or remove a task in a list & clear the list when all tasks are completed. Users can also change the order of the tasks on the list. Webpack has been used in this project.
+> This is a To-Do list app where a user can add or remove a task in a list & clear the list when all tasks are completed. Webpack has been used in this project.
 
 ## Built With
 
@@ -14,7 +14,7 @@
 
 ## Live Demo
 
-[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/milestone-1/dist/index.html)
+[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/functionality/dist/index.html)
 
 ## Getting Started
 
