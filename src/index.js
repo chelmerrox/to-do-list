@@ -2,148 +2,157 @@ import './style.css';
 
 const formSubmission = document.getElementById('form');
 let tasks = [];
-let i = 0; // to be stored as the value of the index (i) property in taskObject
+let i = 0;
 const ul = document.querySelector('ul');
 
+const changeElementAndIcon = (taskObject, verticalLineBtn, verticalLineIcon) => {
+  const taskContainer = document.querySelector(`.task-${taskObject.i}`);
 
-const localData = localStorage.getItem('tasksArray')? JSON.parse(localStorage.getItem('tasksArray')) : [];
+  const p = document.querySelector(`.task-to-edit-${taskObject.i}`);
+
+  taskContainer.removeChild(p);
+
+  const taskToEditInput = document.createElement('input');
+  taskToEditInput.setAttribute('type', 'text');
+  taskToEditInput.setAttribute('name', `task-to-edit-${taskObject.i}`);
+  taskToEditInput.setAttribute('value',`${taskObject.description}`);
+  taskToEditInput.classList.add(`task-to-edit-${taskObject.i}`);
+  taskToEditInput.setAttribute('autocomplete', 'off');
+
+  taskContainer.appendChild(taskToEditInput);
+
+  const removeIcon = document.createElement('i');
+  removeIcon.classList.add('material-icons');
+  removeIcon.classList.add('remove-icon');
+  removeIcon.innerHTML = 'delete';
+  
+  verticalLineBtn.removeChild(verticalLineIcon);
+  verticalLineBtn.appendChild(removeIcon);
+
+  taskToEditInput.addEventListener('change', (e) => {
+    e.preventDefault();
+
+    taskObject.description = e.target.value;
+
+    localStorage.setItem('tasksArray', JSON.stringify(tasks));
+  });
+
+  taskToEditInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter'){
+      taskContainer.removeChild(taskToEditInput);
+      editTask(taskObject, taskToEditInput.value);
+    }
+  });
+}
+
+const displayEditedTask = (editedTaskObject, index) => {
+  const taskContainer2 = document.querySelector(`.task-${editedTaskObject.i}`);
+
+  const p2 = document.createElement('p');
+  p2.classList.add(`.task-to-edit-${editedTaskObject.i}`);
+  p2.innerText = `${editedTaskObject.description}`;
+
+  taskContainer2.appendChild(p2);
+
+  const verticalLineBtn2 = document.getElementById(`vertical-line-btn-${editedTaskObject.i}`);
+
+  const verticalLineIcon2 = document.createElement('i');
+  verticalLineIcon2.classList.add('material-icons');
+  verticalLineIcon2.classList.add('vertical-line-icon');
+  verticalLineIcon2.innerHTML = 'more_vert';
+
+  const removeIcon2 = document.querySelector('.remove-icon');
+
+  verticalLineBtn2.removeChild(removeIcon2);
+  verticalLineBtn2.appendChild(verticalLineIcon2);
+
+  // Click on the vertical line button once to show Remove icon & change <p> to <input>
+  verticalLineBtn2.onclick= () => {
+    changeElementAndIcon(editedTaskObject, verticalLineBtn2, verticalLineIcon2);
+
+    // Clicking on this again removes the task from the list
+    verticalLineBtn.onclick = () => {
+      removeTask(editedTaskObject, index);
+    }; 
+  }
+}
+
+const editTask = (taskObject, taskToEditInputValue) => {
+  tasks = JSON.parse(localStorage.getItem('tasksArray'));
+  
+  let taskObjectIndex = taskObject.i;
+
+  tasks.forEach((task, k) => {
+    if (k === taskObjectIndex - 1) {
+      task.description = taskToEditInputValue;
+
+      console.log(`tasks: ${tasks}`);
+
+      localStorage.setItem('tasksArray', JSON.stringify(tasks));
+
+      displayEditedTask(task, tasks.length - 1);
+    }
+  });
+}
 
 const removeTask = (taskObject, index) => {
-  const list = document.getElementById(index);
+  const list = document.getElementById(index + 1);
 
   // needed so that we're able to filter & store the new result in local storage
   //taskObject.completed = true;
 
   const { description, completed, i } = taskObject;
 
-  //tasks = tasks.filter((task) => task.description !== description && task.completed === completed && task.i !== i );
-
-  let array = localData.filter(task => task.i !== index );
+  tasks = tasks.filter((task) => task.description !== description && task.completed === completed && task.i !== i );
 
   // Change the value of i & store in the i property for the specific task
-  array.map((task, j) => {
+  tasks.map((task, j) => {
     task.i = j + 1;
   });
 
-  localStorage.setItem('tasksArray', JSON.stringify(array));
-  document.location.reload();
+  localStorage.setItem('tasksArray', JSON.stringify(tasks));
+  ul.removeChild(list);
 };
 
-const update = (input, index) => {
-  let x = localData[index - 1];
-  x.description = input.value;
+const displayTask = (taskObject, index) => {
+  const li = document.createElement('li');
+  li.id = index + 1;
 
-  let object = {
-    description: input.value,
-    completed: false,
-    i: index
-  };
-
-  let z = localData.filter((item) => item.i !== index);
-  console.log(z);
-
-  console.log(`index: ${index}`);
-  console.log(`Typeof index: ${typeof(index)}`);
-
-  let y = z.splice(index - 1, 0, {...object});
-  console.log(`y: ${JSON.stringify(y)}`);
-
-  localStorage.setItem('tasksArray', JSON.stringify(y));
-
-  //document.location.reload();
-};
-
-const displayTask = (task) => {
-  /* const li = document.createElement('li');
-  li.id = index; */
-
-  /* li.innerHTML = `
-    <div class="task task-${taskObject.index}">
-      <input type="checkbox" id="task-${taskObject.index}" name="task-${taskObject.index}" value=""/>
-      <button class="task-to-edit">${taskObject.description}</button>
+  li.innerHTML = `
+    <div class="task task-${taskObject.i}">
+      <input type="checkbox" id="task-${taskObject.i}" name="task-${taskObject.i}" value=""/>
+      <p class="task-to-edit-${taskObject.i}">${taskObject.description}</p>
     </div>
-  `; */
-
-  const taskContainer = document.createElement('div');
-  taskContainer.classList.add('task');
-  console.log(`task: ${task}`);
-  taskContainer.classList.add(`task-${task.i}`);
-  taskContainer.id = `task-${task.i}`;
-
-  const checkbox = document.createElement('input');
-  checkbox.classList.add('checkbox');
-  checkbox.id = `checkbox-${task.i}`;
-  checkbox.setAttribute('type', 'checkbox');
-  checkbox.setAttribute('name', `task-${task.i}`);
-  checkbox.setAttribute('value', '');
-
-  const p = document.createElement('p');
-  p.classList.add('task-description');
-  p.classList.add('task-to-edit');
-  p.innerText = task.description;
+  `;
 
   const verticalLineBtn = document.createElement('button');
   verticalLineBtn.classList.add('vertical-line-btn');
-  verticalLineBtn.style.border = 'none';
-  verticalLineBtn.style.backgroundColor = 'white';
+  verticalLineBtn.id = `vertical-line-btn-${taskObject.i}`;
 
   const verticalLineIcon = document.createElement('i');
+  verticalLineIcon.classList.add('vertical-line-icon');
   verticalLineIcon.classList.add('material-icons');
   verticalLineIcon.innerHTML = 'more_vert';
-  verticalLineIcon.style.color = '#b2b2b2';
 
   verticalLineBtn.appendChild(verticalLineIcon);
-  taskContainer.append(checkbox, p, verticalLineBtn);
+  li.appendChild(verticalLineBtn);
 
-  verticalLineBtn.addEventListener('click',  () => {
-    const task1 = localData[task.i];
-    const eachTask = document.getElementById(`task-${task.i}`);
-    eachTask.innerHTML = '';
+  // Click on the vertical line button once to show Remove icon & change <p> to <input>
+  verticalLineBtn.onclick = () => {
+    changeElementAndIcon(taskObject, verticalLineBtn, verticalLineIcon);
 
-    const newInput = document.createElement('input');
+    // Clicking on this again removes the task from the list
+    verticalLineBtn.onclick = () => {
+      removeTask(taskObject, index);
+    }; 
+  };
 
-    console.log(task);
-    newInput.setAttribute('type', 'text');
-    newInput.value = task.description;
-
-    newInput.addEventListener('focusout', () => {
-      update(newInput, task.i);
-    });
-
-    const removeIcon = document.createElement('i');
-    removeIcon.classList.add('material-icons');
-    removeIcon.innerHTML = 'delete';
-    removeIcon.style.color = '#b2b2b2';
-
-    verticalLineBtn.removeChild(verticalLineIcon);
-    verticalLineBtn.appendChild(removeIcon);
-
-    /* verticalLineBtn.onclick = () => {
-      removeTask(task, task.index);
-    }; */
-
-    removeIcon.addEventListener('click', () => {
-      removeTask(task, task.i);
-    });
-
-    eachTask.append(newInput, removeIcon);
-  });
-  
-  //ul.appendChild(task);
-  return taskContainer;
+  ul.appendChild(li);
 };
-
-localData.forEach((task) => {
-  console.log(task);
-
-  let display = displayTask(task);
-
-  ul.append(display);
-});
 
 const addTask = (taskObject) => {
   i = (tasks.length === 0)? 1 : tasks.length + 1; //index for taskObject
-
+  
   taskObject.i = i;
 
   tasks.push(taskObject);
@@ -151,20 +160,7 @@ const addTask = (taskObject) => {
   localStorage.setItem('tasksArray', JSON.stringify(tasks));
 
   displayTask(taskObject, tasks.length - 1);
-
-  document.location.reload();
 }
-
-// Old implementation
-/* const editTask = (editTaskInput, editTaskValue) => {
-  editTaskValue = editTaskInput.value;
-
-  if (editTaskValue !== '') {
-    tasks.map((element, k) => {
-      if ()
-    });
-  }
-}; */
 
 const getFromLocal = () => {
   if (localStorage.getItem('tasksArray')) {
@@ -198,43 +194,3 @@ formSubmission.addEventListener('submit', (e) => {
 
   formSubmission.reset();
 });
-
-/* let editTaskInput = Array.from(document.querySelectorAll('.task-to-edit'));
-console.log(editTaskInput); */
-
-// Old implementation
-/* editTaskInput.forEach((taskInput) => {
-  const editTaskValue = taskInput.value;
-  // const editTaskValue = taskInput.getAttribute('value');
-  //const editTaskValue = taskInput.getAttribute('placeholder');
-
-  console.log(`taskInput: ${taskInput}`);
-  console.log(`taskInput[0]: ${taskInput[0]}`);
-  console.log(`taskInput[1]: ${taskInput[1]}`);
-  console.log(`editTaskValue: ${editTaskValue}`);
-
-  editTaskInput.onclick = () => {
-    editTaskValue = '';
-    editTaskInput.removeAttribute('placeholder');
-    editTask(editTaskInput, editTaskValue);
-  };
-}); */
-
-// New Implementation
-/* editTaskInput.forEach((taskInput) => {
-  const taskContainer  = document.querySelector('.task');
-
-  console.log(taskInput);
-
-  taskInput.onclick = () => {
-    const editTaskInput2 = document.createElement('input');
-    editTaskInput2.classList.add('edit-task-input-2');
-    editTaskInput2.setAttribute('type', 'text');
-    editTaskInput2.setAttribute('name', 'edit-task-input-2');
-    editTaskInput2.setAttribute('value', `${taskInput.innerText}`);
-    editTaskInput2.setAttribute('placeholder', '');
-
-    taskContainer.removeChild(taskInput);
-    taskContainer.appendChild(editTaskInput2);
-  };
-}) */

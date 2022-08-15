@@ -89,7 +89,7 @@ ul {
   list-style: none;
 }
 
-/* ul li {
+ul li {
   display: flex;
   justify-content: space-between;
   padding: 2% 0;
@@ -103,7 +103,7 @@ ul li input[type="text"] {
 ul li input[type="text"]::placeholder {
   color: black;
   font-size: medium;
-} */
+}
 
 .task {
   display: flex;
@@ -119,14 +119,23 @@ ul li input[type="text"]::placeholder {
   flex: 8;
 }
 
-/* ul li button {
+ul li button {
   border: none;
   background-color: white;
 }
 
+ul li .vertical-line-btn {
+  border: none;
+  background-color:white;
+}
+
 ul li .vertical-line-icon {
   color: #b2b2b2;
-} */
+}
+
+ul li .remove-icon {
+  color: #b2b2b2;
+}
 
 .clear-list {
   border: none;
