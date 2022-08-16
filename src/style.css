@@ -63,6 +63,9 @@ form {
 
 .add-task input {
   border: none;
+  width: 80%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .add-task input::placeholder {
@@ -96,12 +99,25 @@ ul li {
   border-bottom: 1px solid #b9b9b9;
 }
 
+ul li.active {
+  height: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 ul li input[type="text"] {
   border: none;
 }
 
 ul li input[type="text"]::placeholder {
   color: black;
+  font-size: medium;
+}
+
+ul li .task-to-edit.active {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
   font-size: medium;
 }
 
