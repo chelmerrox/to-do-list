@@ -12,6 +12,10 @@
 - JavaScript
 - Git
 
+## Preview
+
+![Website preview](./preview.png)
+
 ## Live Demo
 
 [Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/functionality/dist/index.html)
@@ -73,6 +77,8 @@ Give a ⭐️ if you like this project!
 - Coding & Learning Partners: 
   1. [Habiburahman Payenda](https://github.com/HabibPayenda) 
   2. [Elie Harfouche](https://github.com/X-Elie-X) 
+  3. [Ayesha Arshad](https://github.com/shella12) 
+  4. [Eva L. Bucur](https://github.com/BucurEva87) 
 - Morning Session Teams
 - Stand-Up Teams
 - Microverse TSEs
