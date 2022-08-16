@@ -1,44 +1,24 @@
 import './style.css';
 
-const ul = document.querySelector('ul');
-const tasks = [{
-  description: 'Task 1',
-  completed: false,
-  index: 1,
-},
-{
-  description: 'Task 2',
-  completed: false,
-  index: 2,
-},
-{
-  description: 'Task 3',
-  completed: false,
-  index: 3,
-},
-{
-  description: 'Task 4',
-  completed: false,
-  index: 4,
-},
-];
+import Task from './modules/task.js';
 
-const createList = () => {
-  tasks.forEach((task) => {
-    const li = document.createElement('li');
+const formSubmission = document.getElementById('form');
 
-    li.innerHTML = `
-      <div class="task">
-        <input type="checkbox" id="task-${task.index}" name="task-${task.index}" value=""/>
-        <input type="text" name="task-${task.index} value="${task.description}" placeholder="${task.description}"/>
-      </div>
-      <button>
-        <i class="vertical-line-icon material-icons">more_vert</i>
-      </button>
-    `;
+const taskOne = new Task(); // instance for a task
 
-    ul.appendChild(li);
-  });
-};
+formSubmission.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-createList();
+  const addTaskInput = document.querySelector('.add-task-input');
+
+  if (addTaskInput.value !== '') {
+    const taskObject = {
+      name: addTaskInput.value,
+      isDone: false,
+    };
+
+    taskOne.addTask(taskObject);
+  }
+
+  formSubmission.reset();
+});
