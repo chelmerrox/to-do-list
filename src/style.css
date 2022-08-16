@@ -111,22 +111,9 @@ ul li input[type="text"]::placeholder {
   align-items: center;
 }
 
-.checkbox {
-  flex: 1;
-}
-
-.task-description {
-  flex: 8;
-}
-
-ul li button {
-  border: none;
-  background-color: white;
-}
-
 ul li .vertical-line-btn {
   border: none;
-  background-color:white;
+  background-color: white;
 }
 
 ul li .vertical-line-icon {

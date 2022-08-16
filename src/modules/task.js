@@ -57,7 +57,7 @@ export default class Task {
   
     taskContainer2.appendChild(p2);
   
-    const verticalLineBtn2 = document.getElementById(`vertical-line-btn-${editedTaskObject.i}`);
+    /* const verticalLineBtn2 = document.getElementById(`vertical-line-btn-${editedTaskObject.i}`);
   
     const verticalLineIcon2 = document.createElement('i');
     verticalLineIcon2.classList.add('material-icons');
@@ -77,7 +77,9 @@ export default class Task {
       verticalLineBtn.onclick = () => {
         this.removeTask(editedTaskObject, index);
       }; 
-    }
+    } */
+
+    document.location.reload();
   }
   
   editTask(taskObject, taskToEditInputValue){
