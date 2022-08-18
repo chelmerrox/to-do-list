@@ -18,7 +18,7 @@
 
 ## Live Demo
 
-[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/functionality/dist/index.html)
+[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/functionality-2/dist/index.html)
 
 ## Getting Started
 
@@ -49,6 +49,20 @@ $ git clone git@github.com:chelmerrox/to-do-list.git
 
 ```bash
 $ cd to-do-list
+
+```
+
+3. Run this command.
+
+```bash
+$ npm run build
+
+```
+
+4. Run this to deploy the site on your local machine.
+
+```bash
+$ npm start
 
 ```
 
