@@ -79,14 +79,14 @@ export default class Task {
     });
   }
 
-  removeCheckedTask(checkedBoxesIndexes){
+  removeCheckedTask(checkedIndexes) {
     const lists = Array.from(document.querySelectorAll('.list'));
 
     lists.forEach((list, a) => {
-      checkedBoxesIndexes.forEach((checkedBoxesIndex, b) => {
-        if (checkedBoxesIndex === a){
+      checkedIndexes.forEach((checkedIndex) => {
+        if (checkedIndex === a) {
           this.tasks.forEach((task, c) => {
-            if (c === checkedBoxesIndex){
+            if (c === checkedIndex) {
               const { isDone } = task;
 
               this.tasks = this.tasks.filter((obj) => obj.isDone !== isDone);
@@ -160,25 +160,25 @@ export default class Task {
 
     const clearListBtn = document.querySelector('.clear-list-btn');
 
-    let checkedBoxesIndexes = [];
+    let checkedIndexes = [];
 
     checkboxes.forEach((checkbox, j) => {
       const lineThrough = document.querySelector(`.task-to-edit-${j + 1}`);
-      checkbox.addEventListener('change', (e) => {
-        if (checkbox.checked === true){
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked === true) {
           this.tasks.forEach((task, k) => {
-            if (k === j){
+            if (k === j) {
               lineThrough.style.textDecoration = 'line-through';
               task.isDone = true;
-              checkedBoxesIndexes.push(j);
+              checkedIndexes.push(j);
             }
           });
         } else {
           this.tasks.forEach((task, m) => {
-            if (m === j){
+            if (m === j) {
               lineThrough.style.textDecoration = 'none';
               task.isDone = false;
-              checkedBoxesIndexes = checkedBoxesIndexes.filter(checkboxIndex => checkboxIndex !== j);
+              checkedIndexes = checkedIndexes.filter((checkboxIndex) => checkboxIndex !== j);
             }
           });
         }
@@ -188,8 +188,8 @@ export default class Task {
     });
 
     clearListBtn.onclick = () => {
-      checkedBoxesIndexes.sort(function(a,b) { return a-b; });
-      this.removeCheckedTask(checkedBoxesIndexes);
+      checkedIndexes.sort((a, b) => a - b);
+      this.removeCheckedTask(checkedIndexes);
     };
   }
 
