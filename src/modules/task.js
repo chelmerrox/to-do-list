@@ -79,6 +79,32 @@ export default class Task {
     });
   }
 
+  removeCheckedTask(checkedIndexes) {
+    const lists = Array.from(document.querySelectorAll('.list'));
+
+    lists.forEach((list, a) => {
+      checkedIndexes.forEach((checkedIndex) => {
+        if (checkedIndex === a) {
+          this.tasks.forEach((task, c) => {
+            if (c === checkedIndex) {
+              const { isDone } = task;
+
+              this.tasks = this.tasks.filter((obj) => obj.isDone !== isDone);
+
+              this.tasks.forEach((task, j) => {
+                task.i = j + 1;
+              });
+            }
+          });
+          ul.removeChild(list);
+        }
+      });
+    });
+
+    localStorage.setItem('tasksArray', JSON.stringify(this.tasks));
+    document.location.reload();
+  }
+
   removeTask(taskObject, index) {
     const list = document.getElementById(index + 1);
 
@@ -96,12 +122,13 @@ export default class Task {
 
   displayTask(taskObject, index) {
     const li = document.createElement('li');
+    li.classList.add('list');
     li.id = index + 1;
 
     li.innerHTML = `
       <div class="task task-${taskObject.i}">
-        <input type="checkbox" id="task-${taskObject.i}" name="task-${taskObject.i}" value=""/>
-        <p class="task-to-edit-${taskObject.i}">${taskObject.name}</p>
+        <input type="checkbox" class="task-${taskObject.i}" id="task-${taskObject.i}" name="task-${taskObject.i}" value=""/>
+        <p class="line-through-text task-to-edit-${taskObject.i}">${taskObject.name}</p>
       </div>
     `;
 
@@ -128,6 +155,42 @@ export default class Task {
     };
 
     ul.appendChild(li);
+
+    const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+
+    const clearListBtn = document.querySelector('.clear-list-btn');
+
+    let checkedIndexes = [];
+
+    checkboxes.forEach((checkbox, j) => {
+      const lineThrough = document.querySelector(`.task-to-edit-${j + 1}`);
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked === true) {
+          this.tasks.forEach((task, k) => {
+            if (k === j) {
+              lineThrough.style.textDecoration = 'line-through';
+              task.isDone = true;
+              checkedIndexes.push(j);
+            }
+          });
+        } else {
+          this.tasks.forEach((task, m) => {
+            if (m === j) {
+              lineThrough.style.textDecoration = 'none';
+              task.isDone = false;
+              checkedIndexes = checkedIndexes.filter((checkboxIndex) => checkboxIndex !== j);
+            }
+          });
+        }
+
+        localStorage.setItem('tasksArray', JSON.stringify(this.tasks));
+      });
+    });
+
+    clearListBtn.onclick = () => {
+      checkedIndexes.sort((a, b) => a - b);
+      this.removeCheckedTask(checkedIndexes);
+    };
   }
 
   addTask(taskObject) {
