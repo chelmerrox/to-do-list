@@ -18,7 +18,7 @@
 
 ## Live Demo
 
-[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/to-do-list/functionality-2/dist/index.html)
+[Live Demo Link from ./dist/index.html](https://chelmerrox.github.io/to-do-list/dist/)
 
 ## Getting Started
 
